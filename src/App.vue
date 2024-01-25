@@ -17,8 +17,8 @@ export default {
     };
   },
   methods: {
-    deleteFunction() {
-      this.list.splice(this.list.indexOf(), 1);
+    deleteFunction(index) {
+      this.list.splice(index, 1);
     },
   },
 };
@@ -27,11 +27,12 @@ export default {
 <template>
   <div>
     <h1>Lista della spesa:</h1>
-    <ul>
-      <li v-for="item in list" :class="item.done ? 'done' : ''">
-        {{ item.text }} <button @click="deleteFunction(indexOf)">X</button>
+    <ul v-if="list.length > 0">
+      <li v-for="(item, index) in list" :class="item.done ? 'done' : ''">
+        {{ item.text }} <button @click="deleteFunction(index)">X</button>
       </li>
     </ul>
+    <p v-else>Hai il frigo pieno!</p>
   </div>
 </template>
 

@@ -23,7 +23,9 @@ export default {
     },
     addList() {
       console.log("prova di aggiunta del nuvo acquisto nella lista");
-      this.list.unshift(this.newlist);
+      const newRow = { text: this.newlist, done: false };
+      this.list.unshift(newRow);
+      this.newlist = "";
     },
   },
 };

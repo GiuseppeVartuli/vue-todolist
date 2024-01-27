@@ -3,6 +3,7 @@ export default {
   name: "App",
   data() {
     return {
+      newlist: "",
       list: [
         { text: "Carne", done: false },
         { text: "Frutta", done: false },
@@ -20,6 +21,10 @@ export default {
     deleteFunction(index) {
       this.list.splice(index, 1);
     },
+    addList() {
+      console.log("prova di aggiunta del nuvo acquisto nella lista");
+      this.list.unshift(this.newlist);
+    },
   },
 };
 </script>
@@ -27,11 +32,23 @@ export default {
 <template>
   <div>
     <h1>Lista della spesa:</h1>
+
+    <div>
+      <input
+        type="text"
+        v-model="newlist"
+        placeholder="Aggiungi cosa comprare"
+      />
+      <button @click="addList">Add</button>
+    </div>
+
     <ul v-if="list.length > 0">
       <li v-for="(item, index) in list" :class="item.done ? 'done' : ''">
-        {{ item.text }} <button @click="deleteFunction(index)">X</button>
+        {{ item.text }}
+        <button @click="deleteFunction(index)">X</button>
       </li>
     </ul>
+
     <p v-else>Hai il frigo pieno!</p>
   </div>
 </template>
